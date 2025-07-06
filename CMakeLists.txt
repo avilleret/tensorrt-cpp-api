@@ -9,18 +9,10 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Ofast -DNDEBUG -Wno-deprecated-declarations")
 
 # For finding FindTensorRT.cmake
-set(CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake" ${CMAKE_MODULE_PATH})
-
-# TODO: Specify the path to TensorRT root dir
-if (NOT TensorRT_DIR)
-    set(TensorRT_DIR /home/cyrus/work/libs/TensorRT-10.0.0.6/)
-endif()
-# Use the correct version of CUDA
-set(CUDA_TOOLKIT_ROOT_DIR /usr/local/cuda)
+set(CMAKE_MODULE_PATH "${CMAKE_CURRENT_LIST_DIR}/cmake" ${CMAKE_MODULE_PATH})
 
 # We require CUDA, OpenCV, and TensorRT
 find_package(TensorRT REQUIRED)
-find_package(CUDA REQUIRED)
 find_package(OpenCV REQUIRED)
 find_package(fmt REQUIRED)
 
