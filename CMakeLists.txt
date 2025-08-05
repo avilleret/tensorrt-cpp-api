@@ -20,7 +20,25 @@ add_library(tensorrt_cpp_api SHARED
         src/engine.cpp)
 
 target_include_directories(tensorrt_cpp_api PUBLIC ${OpenCV_INCLUDE_DIRS} ${CUDA_INCLUDE_DIRS} ${TensorRT_INCLUDE_DIRS} include include/interfaces)
-target_link_libraries(tensorrt_cpp_api PUBLIC ${OpenCV_LIBS} ${CUDA_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} ${TensorRT_LIBRARIES} fmt::fmt)
+target_compile_definitions(tensorrt_cpp_api
+  INTERFACE
+    FMT_HEADER_ONLY=1
+
+    FMT_USE_LONG_DOUBLE=0
+    FMT_USE_INT128=0
+    FMT_USE_FLOAT128=0
+    FMT_STATIC_THOUSANDS_SEPARATOR=1
+)
+target_link_libraries(tensorrt_cpp_api PUBLIC ${OpenCV_LIBS} ${CUDA_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} ${TensorRT_LIBRARIES})
 
 add_executable(run_inference_benchmark src/main.cpp)
-target_link_libraries(run_inference_benchmark tensorrt_cpp_api fmt::fmt)
+target_compile_definitions(run_inference_benchmark
+  INTERFACE
+    FMT_HEADER_ONLY=1
+
+    FMT_USE_LONG_DOUBLE=0
+    FMT_USE_INT128=0
+    FMT_USE_FLOAT128=0
+    FMT_STATIC_THOUSANDS_SEPARATOR=1
+)
+target_link_libraries(run_inference_benchmark tensorrt_cpp_api)
