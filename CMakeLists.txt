@@ -29,7 +29,7 @@ target_compile_definitions(tensorrt_cpp_api
     FMT_USE_FLOAT128=0
     FMT_STATIC_THOUSANDS_SEPARATOR=1
 )
-target_link_libraries(tensorrt_cpp_api PUBLIC ${OpenCV_LIBS} ${CUDA_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} ${TensorRT_LIBRARIES})
+target_link_libraries(tensorrt_cpp_api PUBLIC ${OpenCV_LIBS} ${CUDA_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} ${TensorRT_LIBRARIES} fmt::fmt)
 
 add_executable(run_inference_benchmark src/main.cpp)
 target_compile_definitions(run_inference_benchmark
