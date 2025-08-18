@@ -22,23 +22,34 @@ add_library(tensorrt_cpp_api SHARED
 target_include_directories(tensorrt_cpp_api PUBLIC ${OpenCV_INCLUDE_DIRS} ${CUDA_INCLUDE_DIRS} ${TensorRT_INCLUDE_DIRS} include include/interfaces)
 target_compile_definitions(tensorrt_cpp_api
   INTERFACE
-    FMT_HEADER_ONLY=1
+  FMT_HEADER_ONLY=1
+  FMT_USE_LONG_DOUBLE=0
+  FMT_USE_INT128=0
+  FMT_USE_FLOAT128=0
+  FMT_STATIC_THOUSANDS_SEPARATOR=1
 
-    FMT_USE_LONG_DOUBLE=0
-    FMT_USE_INT128=0
-    FMT_USE_FLOAT128=0
-    FMT_STATIC_THOUSANDS_SEPARATOR=1
-)
+  SPDLOG_FMT_EXTERNAL=1
+  SPDLOG_NO_DATETIME=1
+  SPDLOG_NO_THREAD_ID=1
+  SPDLOG_NO_NAME=1
+  SPDLOG_DEBUG_ON=1
+  SPDLOG_TRACE_ON=1)
 target_link_libraries(tensorrt_cpp_api PUBLIC ${OpenCV_LIBS} ${CUDA_LIBRARIES} ${CMAKE_THREAD_LIBS_INIT} ${TensorRT_LIBRARIES} fmt::fmt)
 
 add_executable(run_inference_benchmark src/main.cpp)
 target_compile_definitions(run_inference_benchmark
   INTERFACE
-    FMT_HEADER_ONLY=1
+  FMT_HEADER_ONLY=1
+  FMT_USE_LONG_DOUBLE=0
+  FMT_USE_INT128=0
+  FMT_USE_FLOAT128=0
+  FMT_STATIC_THOUSANDS_SEPARATOR=1
 
-    FMT_USE_LONG_DOUBLE=0
-    FMT_USE_INT128=0
-    FMT_USE_FLOAT128=0
-    FMT_STATIC_THOUSANDS_SEPARATOR=1
+  SPDLOG_FMT_EXTERNAL=1
+  SPDLOG_NO_DATETIME=1
+  SPDLOG_NO_THREAD_ID=1
+  SPDLOG_NO_NAME=1
+  SPDLOG_DEBUG_ON=1
+  SPDLOG_TRACE_ON=1
 )
 target_link_libraries(run_inference_benchmark tensorrt_cpp_api)
